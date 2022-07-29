@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ products.title }} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+    <div class="card mb-3 offset-md-4" style="max-width: 400px;">
+        <h1 class="mb-5">Products in category: {{ categories.title|title }}</h1>
+
+        {% for category in categories.category.all %}
+
+
+            <div class="card mb-3 offset-md-4" style="max-width: 400px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        {% load static %}
+                        <img src="{{ category.photo.url }}" class="rounded" alt="..." width="200" height="200">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h5 class="card-title"><a
+                                    href="{{ category.get_absolute_url }}">{{ category.title|title }}</a></h5>
+                            <p class="card-text">Price: {{ category.price }}</p>
+                            <p class="card-text">{{ category.date_pub }}</p>
+                            <p class="card-text"><small
+                                    class="text-muted">Posted: {{ category.date_pub|date:"d/m/Y h:m:s" }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        {% endfor %}
+{% endblock %}
